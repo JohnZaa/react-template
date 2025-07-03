@@ -1,5 +1,6 @@
 // src/App.tsx
 import { Outlet, NavLink } from 'react-router-dom'
+import ThemeToggleButton from './components/ThemeToggleButton' // 引入按钮
 import './App.css' // 我们将为导航栏添加一些样式
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
 
   return (
     <div className="app-container">
+      <ThemeToggleButton /> {/* 添加按钮 */}
       <header className="app-header">
         <h1>React 功能案例模板</h1>
         <nav>

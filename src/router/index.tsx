@@ -9,6 +9,7 @@ const HomePage = React.lazy(() => import('../pages/HomePage'))
 const HooksPage = React.lazy(() => import('../pages/HooksPage'))
 const DataFetchingPage = React.lazy(() => import('../pages/DataFetchingPage'))
 const FormPage = React.lazy(() => import('../pages/FormPage'))
+const AboutPage = React.lazy(() => import('../pages/AboutPage'))
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<PageLoader />}>
             <FormPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'about',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <AboutPage />
           </Suspense>
         ),
       },
