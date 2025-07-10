@@ -12,11 +12,39 @@ function App() {
       <ThemeToggleButton /> {/* 添加按钮 */}
       <header className="app-header">
         <h1>React 功能案例模板</h1>
-        <nav>
-          <NavLink to="/">首页</NavLink>
-          <NavLink to="/hooks">Hooks 示例</NavLink>
-          <NavLink to="/data-fetching">数据请求</NavLink>
-          <NavLink to="/form">表单处理</NavLink>
+        <nav className="github-nav">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? 'nav-link active' : 'nav-link'
+            }
+          >
+            首页
+          </NavLink>
+          <NavLink
+            to="/hooks"
+            className={({ isActive }) =>
+              isActive ? 'nav-link active' : 'nav-link'
+            }
+          >
+            Hooks 示例
+          </NavLink>
+          <NavLink
+            to="/data-fetching"
+            className={({ isActive }) =>
+              isActive ? 'nav-link active' : 'nav-link'
+            }
+          >
+            数据请求
+          </NavLink>
+          <NavLink
+            to="/form"
+            className={({ isActive }) =>
+              isActive ? 'nav-link active' : 'nav-link'
+            }
+          >
+            表单处理
+          </NavLink>
         </nav>
       </header>
       <main className="app-main">

@@ -22,3 +22,26 @@
   border-radius: 6px;
   transition: background-color 0.3s ease;
 }
+
+/* 导航链接样式 */
+.nav-link {
+  position: relative;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  color: var(--color-text);
+  transition:
+    color 0.2s,
+    background 0.2s,
+    box-shadow 0.2s;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
+.nav-link:hover {
+  background: rgba(0, 123, 255, 0.08); /* 浅色选框 */
+  box-shadow: 0 0 0 2px var(--color-primary);
+  color: var(--color-primary);
+}
