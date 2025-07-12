@@ -1,5 +1,3 @@
-import React from 'react'
-
 const views = [
   { name: 'Home', path: '/' },
   { name: 'Hooks Demo', path: '/hooks' },
