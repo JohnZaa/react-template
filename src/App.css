@@ -22,9 +22,8 @@
   border-radius: 6px;
   transition: background-color 0.3s ease;
 }
-
 /* 导航链接样式 */
-.nav-link {
+/* .nav-link {
   position: relative;
   padding: 0.5rem 1rem;
   border-radius: 6px;
@@ -38,10 +37,32 @@
 .nav-link.active {
   font-weight: bold;
   color: var(--color-primary);
+} */
+
+/* 浅色选框 */
+/* .nav-link:hover {
+  background: rgba(0, 123, 255, 0.08);
+  box-shadow: 0 0 0 2px var(--color-primary);
+  color: var(--color-primary);
+} */
+
+.nav-link {
+  color: #24292f;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition:
+    background 0.15s,
+    color 0.15s;
 }
 
 .nav-link:hover {
-  background: rgba(0, 123, 255, 0.08); /* 浅色选框 */
-  box-shadow: 0 0 0 2px var(--color-primary);
-  color: var(--color-primary);
+  background: #eaecef;
+  color: #0366d6;
+}
+
+.nav-link.active {
+  background: #0366d6;
+  color: #fff;
 }

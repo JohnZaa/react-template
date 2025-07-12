@@ -45,6 +45,30 @@ function App() {
           >
             表单处理
           </NavLink>
+          <NavLink
+            to="/views"
+            className={({ isActive }) =>
+              isActive ? 'nav-link active' : 'nav-link'
+            }
+          >
+            视图列表
+          </NavLink>
+          <NavLink
+            to="/table-view"
+            className={({ isActive }) =>
+              isActive ? 'nav-link active' : 'nav-link'
+            }
+          >
+            Table View
+          </NavLink>
+          <NavLink
+            to="/configurable-form"
+            className={({ isActive }) =>
+              isActive ? 'nav-link active' : 'nav-link'
+            }
+          >
+            Config Form
+          </NavLink>
         </nav>
       </header>
       <main className="app-main">

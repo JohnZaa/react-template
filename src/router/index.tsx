@@ -10,6 +10,11 @@ const HooksPage = React.lazy(() => import('../pages/HooksPage'))
 const DataFetchingPage = React.lazy(() => import('../pages/DataFetchingPage'))
 const FormPage = React.lazy(() => import('../pages/FormPage'))
 const AboutPage = React.lazy(() => import('../pages/AboutPage'))
+const ViewsListPage = React.lazy(() => import('../pages/ViewsListPage'))
+const TableViewPage = React.lazy(() => import('../pages/TableViewPage'))
+const ConfigurableFormPage = React.lazy(
+  () => import('../pages/ConfigurableFormPage')
+)
 
 const router = createBrowserRouter([
   {
@@ -54,6 +59,30 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<PageLoader />}>
             <AboutPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'views',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <ViewsListPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'table-view',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <TableViewPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'configurable-form',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <ConfigurableFormPage />
           </Suspense>
         ),
       },
