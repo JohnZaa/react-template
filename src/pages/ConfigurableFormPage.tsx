@@ -23,6 +23,7 @@ interface FieldConfig {
   name: string
   label: string
   type: FieldType
+  width?: number // New property for width
   options?: { label: string; value: string | number }[]
   rules?: RegisterOptions
 }
@@ -32,12 +33,14 @@ const formConfig: FieldConfig[] = [
     name: 'username',
     label: 'Username',
     type: 'text',
+    width: 200, // New property for width
     rules: { required: 'Username is required' },
   },
   {
     name: 'email',
     label: 'Email',
     type: 'email',
+    width: 200, // New property for width
     rules: {
       required: 'Email is required',
       pattern: { value: /^\S+@\S+$/, message: 'Invalid email' },
@@ -47,6 +50,7 @@ const formConfig: FieldConfig[] = [
     name: 'age',
     label: 'Age',
     type: 'number',
+    width: 200, // New property for width
     rules: {
       required: 'Age is required',
       min: { value: 18, message: 'Must be at least 18' },
@@ -56,6 +60,7 @@ const formConfig: FieldConfig[] = [
     name: 'gender',
     label: 'Gender',
     type: 'select',
+    width: 200, // New property for width
     options: [
       { label: 'Male', value: 'male' },
       { label: 'Female', value: 'female' },
@@ -67,6 +72,7 @@ const formConfig: FieldConfig[] = [
     name: 'accept',
     label: 'Accept Terms',
     type: 'checkbox',
+    width: 200, // New property for width
     rules: { required: 'You must accept the terms' },
   },
 ]
@@ -146,6 +152,9 @@ const ConfigurableFormPage = () => {
     formState: { errors },
   } = useForm<FormData>()
   const [fields, setFields] = useState(formConfig)
+  const [panelWidth, setPanelWidth] = useState(480)
+  const minPanelWidth = 800 // Adjusted to a larger value for better usability
+  const maxPanelWidth = 1000
   const sensors = useSensors(useSensor(PointerSensor))
 
   const onSubmit = (data: FormData) => {
@@ -161,9 +170,51 @@ const ConfigurableFormPage = () => {
     }
   }
 
+  const panelStyle: React.CSSProperties = {
+    width: panelWidth,
+    minWidth: minPanelWidth,
+    maxWidth: maxPanelWidth,
+    margin: '0 auto',
+    padding: 24,
+    position: 'relative',
+  }
+
+  const handlePanelResize = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    const startX = e.clientX
+    const startWidth = panelWidth
+    const onMouseMove = (moveEvent: MouseEvent) => {
+      const newWidth = Math.min(
+        Math.max(startWidth + moveEvent.clientX - startX, minPanelWidth),
+        maxPanelWidth
+      )
+      setPanelWidth(newWidth)
+    }
+    const onMouseUp = () => {
+      window.removeEventListener('mousemove', onMouseMove)
+      window.removeEventListener('mouseup', onMouseUp)
+    }
+    window.addEventListener('mousemove', onMouseMove)
+    window.addEventListener('mouseup', onMouseUp)
+  }
+
   return (
-    <div style={{ maxWidth: 480, margin: '0 auto', padding: 24 }}>
+    <div style={panelStyle}>
       <h2 style={{ marginBottom: 24 }}>Configurable Complex Form</h2>
+      <div
+        style={{
+          position: 'absolute',
+          right: 0,
+          top: 0,
+          width: 8,
+          height: '100%',
+          cursor: 'ew-resize',
+          zIndex: 10,
+        }}
+        onMouseDown={handlePanelResize}
+        title="Drag to resize panel"
+      />
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
@@ -215,7 +266,10 @@ const ConfigurableFormPage = () => {
                                     ? controllerField.value
                                     : ''
                                 }
-                                style={inputStyle}
+                                style={{
+                                  ...inputStyle,
+                                  width: field.width || '100%',
+                                }}
                               />
                             )
                           case 'number':
@@ -232,7 +286,10 @@ const ConfigurableFormPage = () => {
                                       : Number(e.target.value)
                                   )
                                 }
-                                style={inputStyle}
+                                style={{
+                                  ...inputStyle,
+                                  width: field.width || '100%',
+                                }}
                               />
                             )
                           case 'select':
@@ -241,7 +298,10 @@ const ConfigurableFormPage = () => {
                                 {...controllerField}
                                 id={field.name}
                                 value={String(controllerField.value ?? '')}
-                                style={inputStyle}
+                                style={{
+                                  ...inputStyle,
+                                  width: field.width || '100%',
+                                }}
                               >
                                 <option value="">Select...</option>
                                 {field.options?.map((opt) => (
@@ -269,7 +329,10 @@ const ConfigurableFormPage = () => {
                                   onChange={(e) =>
                                     controllerField.onChange(e.target.checked)
                                   }
-                                  style={{ marginRight: 6 }}
+                                  style={{
+                                    marginRight: 6,
+                                    height: 16,
+                                  }}
                                 />
                                 {field.label}
                               </label>
